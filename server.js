@@ -39,6 +39,10 @@ app.get("/protected", authenticate, (req, res) => {
   res.json({ message: `Welcome ${req.user.name}`, user: req.user });
 });
 
+app.get("/", (req, res) => {
+  res.send("✅ API is running");
+});
+
 connectDB()
   .then(() => {
     app.listen(PORT, "0.0.0.0", () => {
