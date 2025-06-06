@@ -5,7 +5,7 @@ import tripRoutes from "./routes/trip.route.js";
 import userRoutes from "./routes/user.route.js";
 import authenticate from "./middleware/authenticate.js";
 import cors from "cors";
-import API_BASE_URL from "./config/api.js";
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -41,7 +41,7 @@ app.get("/protected", authenticate, (req, res) => {
 
 connectDB()
   .then(() => {
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log("Server started at http://localhost:" + PORT);
     });
   })
