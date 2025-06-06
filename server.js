@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 connectDB()
   .then(() => {
     app.listen(PORT, "0.0.0.0", () => {
-      console.log("Server started at http://localhost:" + PORT);
+      console.log(`Server started at ${PORT}`);
     });
   })
   .catch((err) => {
