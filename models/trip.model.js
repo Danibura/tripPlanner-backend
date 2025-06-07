@@ -27,9 +27,13 @@ const tripSchema = new mongoose.Schema(
       type: [String],
       required: false,
     },
-    users: {
+    organizers: {
       type: [String],
-      required: true,
+      required: false,
+    },
+    participants: {
+      type: [String],
+      required: false,
     },
   },
   {
