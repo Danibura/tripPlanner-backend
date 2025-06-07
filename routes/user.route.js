@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   getUsers,
+  getUserByEmail,
   register,
   login,
   refToken,
@@ -11,6 +12,8 @@ import {
 const router = express.Router();
 
 router.get("/", getUsers);
+
+router.get("/email/:email", getUserByEmail);
 
 router.post("/register", register);
 

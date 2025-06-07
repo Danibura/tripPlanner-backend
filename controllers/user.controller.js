@@ -4,7 +4,26 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import RefreshToken from "../models/RefreshToken.js";
 dotenv.config();
-const getUsers = async (req, res) => {};
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    console.log("Error in fetching users");
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+const getUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await User.findOne({ email }).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ user });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 function generateAccessToken(user) {
   return jwt.sign(
@@ -116,4 +135,4 @@ const logout = async (req, res) => {
   res.sendStatus(204);
 };
 
-export { getUsers, register, login, refToken, logout };
+export { getUsers, getUserByEmail, register, login, refToken, logout };
