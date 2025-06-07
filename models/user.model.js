@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  pfp: {
+    type: Number,
+    required: true,
+    default: () => Math.floor(Math.random * 10) + 1,
+  },
 });
 
 userSchema.pre("save", async function (next) {
