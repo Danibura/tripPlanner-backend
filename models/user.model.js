@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   pfp: {
     type: Number,
     required: true,
-    default: () => Math.floor(Math.random * 10) + 1,
+    default: () => Math.floor(Math.random() * 10) + 1,
   },
 });
 
