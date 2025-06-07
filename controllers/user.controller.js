@@ -135,4 +135,29 @@ const logout = async (req, res) => {
   res.sendStatus(204);
 };
 
-export { getUsers, getUserByEmail, register, login, refToken, logout };
+const updateUser = async (req, res) => {
+  const { email } = req.params;
+  const updatedUser = req.body;
+  try {
+    const newUser = await User.findOneAndUpdate({ email: email }, updatedUser, {
+      new: true,
+    });
+    if (!newUser)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    res.status(200).json({ success: true, data: newUser });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export {
+  getUsers,
+  getUserByEmail,
+  register,
+  login,
+  refToken,
+  logout,
+  updateUser,
+};

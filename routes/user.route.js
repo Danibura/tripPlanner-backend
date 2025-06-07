@@ -7,6 +7,7 @@ import {
   login,
   refToken,
   logout,
+  updateUser,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
@@ -22,4 +23,6 @@ router.post("/login", login);
 router.post("/token", refToken);
 
 router.post("/logout", logout);
+
+router.put("/:email", updateUser);
 export default router;
