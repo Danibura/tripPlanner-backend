@@ -146,7 +146,23 @@ const updateUser = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, message: "User not found" });
-    res.status(200).json({ success: true, data: newUser });
+
+    const accessToken = generateAccessToken(newUser);
+    const refreshToken = generateRefreshToken(newUser);
+    await RefreshToken.create({ token: refreshToken, userId: newUser._id });
+
+    const safeUser = {
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+    };
+
+    res.status(201).json({
+      message: "Registration completed",
+      user: safeUser,
+      accessToken,
+      refreshToken,
+    });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
   }
