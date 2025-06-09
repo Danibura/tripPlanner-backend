@@ -11,6 +11,17 @@ export const getTrips = async (req, res) => {
   }
 };
 
+export const getTripByCode = async (req, res) => {
+  try {
+    const code = req.params.code;
+    const trip = await Trip.findOne({ accessCode: code });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
+    res.json({ trip });
+  } catch (err) {
+    res.status(500).json({ message: "Error getting the trip" });
+  }
+};
+
 export const createTrip = async (req, res) => {
   const trip = req.body;
 
