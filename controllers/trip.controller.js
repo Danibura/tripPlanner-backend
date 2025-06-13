@@ -72,16 +72,10 @@ export const updateTrip = async (req, res) => {
 };
 
 export const deleteTrip = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res
-      .status(404)
-      .json({ success: false, message: "Invalid product id" });
-  }
+  const code = req.params.code;
 
   try {
-    await Trip.findByIdAndDelete(id);
+    await Trip.findOneAndDelete({ accessCode: code });
     res.status(200).json({ success: true, message: "Trip deleted" });
   } catch (error) {
     console.log("error in deliting trip");

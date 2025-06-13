@@ -27,7 +27,7 @@ const getUserByEmail = async (req, res) => {
 
 function generateAccessToken(user) {
   return jwt.sign(
-    { id: user._id, email: user.email, name: user.name },
+    { id: user._id, email: user.email },
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: "1h",
@@ -37,7 +37,7 @@ function generateAccessToken(user) {
 
 function generateRefreshToken(user) {
   return jwt.sign(
-    { id: user._id, email: user.email, name: user.name },
+    { id: user._id, email: user.email },
     process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: "7d",

@@ -34,6 +34,18 @@ const userSchema = new mongoose.Schema({
     type: [String],
     required: false,
   },
+  friends: {
+    type: [String],
+    required: false,
+  },
+  requests: {
+    type: [String],
+    required: false,
+  },
+  invitations: {
+    type: [String],
+    required: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {

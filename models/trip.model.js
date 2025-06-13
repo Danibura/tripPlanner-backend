@@ -34,6 +34,10 @@ const tripSchema = new mongoose.Schema(
       type: [String],
       required: false,
     },
+    country: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
