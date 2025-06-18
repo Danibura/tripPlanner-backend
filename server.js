@@ -15,6 +15,7 @@ console.log(process.env.MONGO_URL);
 const allowedOrigins = [
   "http://localhost:5173", // sviluppo locale
   "https://trip-planner-rust-gamma.vercel.app", // dominio deployato
+  "https://trip-planner-jp5i0bj30-daniburas-projects.vercel.app",
 ];
 
 app.use(

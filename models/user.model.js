@@ -52,6 +52,10 @@ const userSchema = new mongoose.Schema({
     type: [InvitationSchema],
     required: false,
   },
+  resetToken: {
+    type: [String],
+    required: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
