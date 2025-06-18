@@ -189,6 +189,20 @@ const forgotPassword = async (req, res) => {
   res.status(200).json({ resetUrl });
 };
 
+const resetPassword = async (req, res) => {
+  try {
+    const { resetToken, password } = req.body;
+    const user = await User.findOne({ resetToken });
+    if (!user) return { success: false, message: "Token not valid" };
+    user.password = password;
+    user.resetToken = undefined;
+    await user.save();
+    res.status(200).json({ success: true, message: "Password changed" });
+  } catch (error) {
+    console.log(error.message);
+    return { success: false, message: error.message };
+  }
+};
 export {
   getUsers,
   getUserByEmail,
@@ -199,4 +213,5 @@ export {
   updateUser,
   deleteUser,
   forgotPassword,
+  resetPassword,
 };
