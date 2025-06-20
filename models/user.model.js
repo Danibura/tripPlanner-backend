@@ -56,6 +56,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  calendarCode: {
+    type: String,
+    required: false,
+    default: () => Math.floor(Math.random() * 100000000),
+  },
+  showCalendar: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {

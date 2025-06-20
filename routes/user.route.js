@@ -11,6 +11,7 @@ import {
   deleteUser,
   forgotPassword,
   resetPassword,
+  getUserByCalendar,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
@@ -34,4 +35,6 @@ router.delete("/:email", deleteUser);
 router.post("/forgotPassword", forgotPassword);
 
 router.post("/resetPassword", resetPassword);
+
+router.get("/calendar/:calendarCode", getUserByCalendar);
 export default router;

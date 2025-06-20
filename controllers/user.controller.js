@@ -25,6 +25,17 @@ const getUserByEmail = async (req, res) => {
   }
 };
 
+const getUserByCalendar = async (req, res) => {
+  try {
+    const calendarCode = req.params.calendarCode;
+    const user = await User.findOne({ calendarCode }).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ user });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 function generateAccessToken(user) {
   return jwt.sign(
     { id: user._id, email: user.email },
@@ -230,4 +241,5 @@ export {
   deleteUser,
   forgotPassword,
   resetPassword,
+  getUserByCalendar,
 };
